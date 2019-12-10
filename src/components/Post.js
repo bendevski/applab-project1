@@ -1,12 +1,47 @@
 import React,{useState} from 'react';
 import Comment from './Comment';
 import LikeButtons from './LikeButton';
-
 import axios from 'axios';
+import styled from 'styled-components';
+import '../App.css'
 
+const WholeWrapper = styled.div`
+    background-color: #6CB2D1; 
+    display: flex;
+    flex-direction:column;
+    flex: 26%;
+    justify content: start;
+    border-style: solid;
+    border-width: 1px;
+`
+
+const TitleWrapper = styled.h1`
+    text-align: center;
+    font-size: 23px;
+
+`
+
+const ContentWrapper = styled.p`
+    justify-content: start;
+    text-align: left;
+`
+const LikesWrapper = styled.div`
+    box-shadow: 1px 1px 1px;
+    display:flex;    
+    flex-direction:row;
+    justify-content:space-between;
+`
+const CommentWrapper = styled.div`
+
+`
 function Post(props){
     const [comments, setComments] = useState(props.comments.map((comment)=><Comment key={comment.id} content={comment}/>));
     const [commentVal, setCommentVal] = useState("")
+    const [up, upMe] = useState(props.likes);
+
+    function upper(thing){
+        upMe(parseInt(up)+parseInt(thing));
+    }
 
     function typing(e){
         if (e.key==='Enter'){
@@ -33,15 +68,23 @@ function Post(props){
     }
     
     return (
-        <div className='post'>
-            <h1 className='postTitle'>{props.title}</h1>
-            <p className='postContent'>{props.content}</p>
-            <LikeButtons id={props.id}/>
-            <div className='commentSection'>
+        <WholeWrapper>
+            <TitleWrapper>
+                {props.title}
+            </TitleWrapper>
+            <ContentWrapper>
+                {props.content}
+            </ContentWrapper>
+            <LikesWrapper>
+            <LikeButtons id={props.id} up={upper}/> 
+            Score:{up}
+            </LikesWrapper>
+            <CommentWrapper>
                 {comments}
-                <input type="text" value={commentVal} onSubmit={comment} onChange={typing} onKeyDown={isEnter}/>
-            </div>
-        </div>
+                <input className='no' type="text" value={commentVal} onSubmit={comment} onChange={typing} onKeyDown={isEnter}/>
+            </CommentWrapper>
+            
+        </WholeWrapper>
     )
 }
 

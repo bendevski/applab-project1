@@ -1,5 +1,13 @@
 import React,{useState} from 'react';
-
+import styled from 'styled-components';
+import '../App.css'
+const Wrapper = styled.div`
+    display: flex;
+    position:center;
+    flex-direction:column;
+    align-items:center;
+    width:40%;
+`
 export default function(props){
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("")
@@ -21,12 +29,12 @@ export default function(props){
 
     }
     return(
-        <div>
-            <h1>What's your problem?</h1>
+        <Wrapper>
+            <h2>What's your problem?</h2>
             <h3>Problem</h3>
-            <input type='text' name="title" value={title} onChange={input} onKeyDown={enter}/>
+            <input  type='text' name="title" value={title} onChange={input} onKeyDown={enter}/>
             <h3>Description</h3>
             <input type='text' name="content" value={content} onChange={input} onKeyDown={enter}/>
-        </div>
+        </Wrapper>
     )
 }

@@ -6,6 +6,15 @@ import Trending from './Trending';
 import NavBar from './NavBar';
 import MakePost from './MakePost'
 import axios from 'axios';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+`
+
+
 export default function Control(){
     
     const [hasError, setErrors] = useState(null);
@@ -35,13 +44,15 @@ export default function Control(){
     if (!posts){
         return(false);
     }
+    console.log(posts)
     return(
-        <div>
         
         <Router>
             
         <NavBar/>
-        <MakePost sendUp={newPost}/>
+        <Wrapper>
+            <MakePost sendUp={newPost}/>
+        </Wrapper>
             <Route exact path='/'>
                 <Home posts={posts.res}/>
             </Route>
@@ -52,6 +63,5 @@ export default function Control(){
                 <HoF posts={posts.res}/>
             </Route>
         </Router>
-        </div>
     )
 }
