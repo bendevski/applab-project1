@@ -20,13 +20,13 @@ export default function Control(){
     const [hasError, setErrors] = useState(null);
     const [posts, setPosts] = useState();
     function newPost(thing){
-        axios.post("http://18.163.121.55/api/posts", thing)
+        axios.post("/api/posts", thing)
             .catch((error)=>console.log(error));
         console.log(thing);
         setPosts({res:[...posts.res,thing]});
     }
     async function FetchData(){
-        const res = await fetch("http://18.163.121.55/api/posts");
+        const res = await fetch("/api/posts");
     res.json()
     .then(res=>setPosts({res}))
     .catch(err=>setErrors(err))

@@ -35,7 +35,7 @@ const CommentWrapper = styled.div`
 
 `
 function Post(props){
-    const [comments, setComments] = useState(props.comments.map((comment)=><Comment key={comment.id} content={comment}/>));
+    const [comments, setComments] = useState(props.comments.map((comment)=><Comment key={comment.id} content={comment.content}/>));
     const [commentVal, setCommentVal] = useState("")
     const [up, upMe] = useState(props.likes);
 
@@ -58,7 +58,7 @@ function Post(props){
         const newComment = <Comment key={comments.length} content={commentVal}/>;
         setComments([...comments, newComment]);
         //post
-        axios.post("http://18.163.121.55/api/comments", {
+        axios.post("/api/comment", {
             post_id:props.id,
             content:commentVal
         }
@@ -76,7 +76,7 @@ function Post(props){
                 {props.content}
             </ContentWrapper>
             <LikesWrapper>
-            <LikeButtons id={props.id} up={upper}/> 
+                <LikeButtons id={props.id} up={upper}/> 
             Score:{up}
             </LikesWrapper>
             <CommentWrapper>

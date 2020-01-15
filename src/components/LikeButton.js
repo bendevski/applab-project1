@@ -22,10 +22,10 @@ export default function(props){
         
         if (e.target.name==='+') {setPlus(true); setMinus(false);}
         else {setMinus(true); setPlus(false);}
-        
-        const url = "http://18.163.121.55/api/like/" + props.id;
+        console.log(e.target.name);
+        const url = "/api/posts/like/" + props.id;
         axios.put(url,{
-            type:e.target.name
+            type: e.target.name
         }
         )
         if(e.target.name==="+") props.up(1)
